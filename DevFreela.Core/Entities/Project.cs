@@ -29,5 +29,40 @@ namespace DevFreela.Core.Entities
         public DateTime? FinishedAt { get; private set; }
         public ProjectStatusEnums Status { get; set; }
         public List<ProjectComment> Comments { get; set; }
+
+        public void Cancel()
+        {
+            if (Status == ProjectStatusEnums.InProgress || Status == ProjectStatusEnums.InProgress)
+            {
+                Status = ProjectStatusEnums.Cancelled;
+            }
+        }
+
+        public void Finish()
+        {
+            if(Status == ProjectStatusEnums.InProgress)
+            {
+                Status = ProjectStatusEnums.Finished;
+                FinishedAt = DateTime.Now;
+            }
+        }
+
+        public void Start()
+        {
+            if (Status == ProjectStatusEnums.Created)
+            {
+                Status = ProjectStatusEnums.InProgress;
+                StartedAt = DateTime.Now;
+            }
+        }
+
+        public void Update(string title, string description, decimal totalCost)
+        {
+            Title = title;
+            Description = description;
+            TotalCost = totalCost;
+        }
+
+
     }
 }

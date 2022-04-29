@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DevFreela.Core.Enums;
+using System;
 
 namespace DevFreela.Core.Entities
 {
@@ -14,6 +15,6 @@ namespace DevFreela.Core.Entities
         public string Content { get; set; }
         public int IdProject { get; set; }
         public int IdUser { get; set; }
-        public DateTime CreatedAt { get; private set; }
+        public DateTime CreatedAt { get; private set; }    
     }
 }
