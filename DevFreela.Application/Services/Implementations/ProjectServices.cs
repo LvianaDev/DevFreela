@@ -10,9 +10,8 @@ namespace DevFreela.Application.Services.Implementations
 {
     public class ProjectServices : IProjectService
     {
-        private readonly DevFreelaDbContext _dbContext;
         private Project project;
-
+        private readonly DevFreelaDbContext _dbContext;
         public ProjectServices(DevFreelaDbContext dbContext)
         {
             _dbContext = dbContext;
@@ -20,7 +19,7 @@ namespace DevFreela.Application.Services.Implementations
 
         public int Create(NewProjectInputModel inputModel)
         {
-            var project = new Project(inputModel.Title, inputModel.Dexcription, inputModel.IdClient, inputModel.IdFreelancer, inputModel.TotalCost);
+            var project = new Project(inputModel.Title, inputModel.Description, inputModel.IdClient, inputModel.IdFreelancer, inputModel.TotalCost);
             _dbContext.Projects.Add(project);
 
             return project.Id;
@@ -50,7 +49,7 @@ namespace DevFreela.Application.Services.Implementations
             var projects = _dbContext.Projects;
 
             var projectsViewModel = projects
-                .Select(p => new ProjectViewModel(p.Title, p.CreatedAt))
+                .Select(p => new ProjectViewModel(p.Id, p.Title, p.CreatedAt))
                 .ToList();
 
             return projectsViewModel;
@@ -83,7 +82,7 @@ namespace DevFreela.Application.Services.Implementations
         {
             var project = _dbContext.Projects.SingleOrDefault(p => p.Id == inputModel.Id);
 
-            project.Update(inputModel.Title, inputModel.Dexcription, inputModel.TotalCost);
+            project.Update(inputModel.Title, inputModel.Description, inputModel.TotalCost);
         }
     }
 }

@@ -56,19 +56,19 @@ namespace DevFreela.API.Controllers
             return CreatedAtAction(nameof(GetById), new { id = id }, inputModel);
         }
 
-        //// api/projects/2
-        //[HttpPut("{id}")]
-        //public IActionResult Put(int id, [FromBody] UpdateProjectInputModel inputModel)
-        //{
-        //    //if (inputModel.Description.Length > 200)
-        //    //{
-        //    //    return BadRequest();
-        //    //}
+        //api/projects/2
+        [HttpPut("{id}")]
+        public IActionResult Put(int id, [FromBody] UpdateProjectInputModel inputModel)
+        {
+            if (inputModel.Title.Length > 200)
+            {
+                return BadRequest();
+            }
 
-        //    //_projectService.Update(inputModel);
+            _projectService.Update(inputModel);
 
-        //    //return NoContent();
-        //}
+            return NoContent();
+        }
 
         // api/projects/3 DELETE
         [HttpDelete("{id}")]
