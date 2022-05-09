@@ -3,45 +3,31 @@ using DevFreela.Application.Services.Interfaces;
 using DevFreela.Application.ViewModels;
 using DevFreela.Core.Entities;
 using DevFreela.Infrastructure.Persistence;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Data.SqlClient;
+using Dapper;
 
 namespace DevFreela.Application.Services.Implementations
 {
-    public class ProjectServices : IProjectService
+    public class ProjectService : IProjectService
     {
-        private Project project;
         private readonly DevFreelaDbContext _dbContext;
-        public ProjectServices(DevFreelaDbContext dbContext)
+        private readonly string _connectionString;
+        public ProjectService(DevFreelaDbContext dbContext, IConfiguration configuration)
         {
             _dbContext = dbContext;
+            _connectionString = configuration.GetConnectionString("DevFreelaCs");
         }
-
-        public int Create(NewProjectInputModel inputModel)
-        {
-            var project = new Project(inputModel.Title, inputModel.Description, inputModel.IdClient, inputModel.IdFreelancer, inputModel.TotalCost);
-            _dbContext.Projects.Add(project);
-
-            return project.Id;
-        }
-
-        public void CreateComment(CreateCommentInputModel inputModel)
-        {
-            var comment = new ProjectComment(inputModel.Content, inputModel.IdProject, inputModel.IdUser);
-
-            _dbContext.ProjectComments.Add(comment);
-        }
-
-        public void Delete(int id)
-        {
-            var project = _dbContext.Projects.SingleOrDefault(p => p.Id == id);
-            project.Cancel();
-        }
-
         public void Finish(int id)
         {
             var project = _dbContext.Projects.SingleOrDefault(p => p.Id == id);
+
             project.Finish();
+            _dbContext.SaveChanges();
         }
 
         public List<ProjectViewModel> GetAll(string query)
@@ -57,7 +43,12 @@ namespace DevFreela.Application.Services.Implementations
 
         public ProjectDetailsViewModel GetById(int id)
         {
-            var project = _dbContext.Projects.SingleOrDefault(p => p.Id == id);
+            var project = _dbContext.Projects
+                .Include(p => p.Client)
+                .Include(p => p.Freelancer)
+                .SingleOrDefault(p => p.Id == id);
+
+            if (project == null) return null;
 
             var projectDetailsViewModel = new ProjectDetailsViewModel(
                 project.Id,
@@ -65,24 +56,29 @@ namespace DevFreela.Application.Services.Implementations
                 project.Description,
                 project.TotalCost,
                 project.StartedAt,
-                project.FinishedAt
+                project.FinishedAt,
+                project.Client.FullName,
+                project.Freelancer.FullName
                 );
 
             return projectDetailsViewModel;
-
         }
 
         public void Start(int id)
         {
             var project = _dbContext.Projects.SingleOrDefault(p => p.Id == id);
+
             project.Start();
-        }
+            // _dbContext.SaveChanges();
 
-        public void Update(UpdateProjectInputModel inputModel)
-        {
-            var project = _dbContext.Projects.SingleOrDefault(p => p.Id == inputModel.Id);
+            using (var sqlConnection = new SqlConnection(_connectionString))
+            {
+                sqlConnection.Open();
 
-            project.Update(inputModel.Title, inputModel.Description, inputModel.TotalCost);
-        }
+                var script = "UPDATE Projects SET Status = @status, StartedAt = @startedat WHERE Id = @id";
+
+                sqlConnection.Execute(script, new { status = project.Status, startedat = project.StartedAt, id });
+            }
+        }      
     }
 }
