@@ -11,6 +11,15 @@
           "lib/net5.0/Dapper.dll": {}
         }
       },
+      "FluentValidation/9.5.1": {
+        "type": "package",
+        "compile": {
+          "lib/net5.0/FluentValidation.dll": {}
+        },
+        "runtime": {
+          "lib/net5.0/FluentValidation.dll": {}
+        }
+      },
       "MediatR/9.0.0": {
         "type": "package",
         "compile": {
@@ -1527,6 +1536,7 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v5.0",
         "dependencies": {
+          "Dapper": "2.0.78",
           "DevFreela.Core": "1.0.0",
           "Microsoft.EntityFrameworkCore.SqlServer": "5.0.3"
         },
@@ -1555,6 +1565,24 @@
         "lib/net5.0/Dapper.xml",
         "lib/netstandard2.0/Dapper.dll",
         "lib/netstandard2.0/Dapper.xml"
+      ]
+    },
+    "FluentValidation/9.5.1": {
+      "sha512": "By09e2m4N3giD7Giq8NCFgkgN5Hkm8Lv/bk8AadD9Xc6jjj2WDGrD6l9keZbWbkO9aygiHQREIt47iS2sVSU7w==",
+      "type": "package",
+      "path": "fluentvalidation/9.5.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "fluent-validation-icon.png",
+        "fluentvalidation.9.5.1.nupkg.sha512",
+        "fluentvalidation.nuspec",
+        "lib/net461/FluentValidation.dll",
+        "lib/net461/FluentValidation.xml",
+        "lib/net5.0/FluentValidation.dll",
+        "lib/net5.0/FluentValidation.xml",
+        "lib/netstandard2.0/FluentValidation.dll",
+        "lib/netstandard2.0/FluentValidation.xml"
       ]
     },
     "MediatR/9.0.0": {
@@ -5813,6 +5841,7 @@
       "Dapper >= 2.0.78",
       "DevFreela.Core >= 1.0.0",
       "DevFreela.Infrastructure >= 1.0.0",
+      "FluentValidation >= 9.5.1",
       "MediatR.Extensions.Microsoft.DependencyInjection >= 9.0.0"
     ]
   },
@@ -5870,6 +5899,10 @@
           "Dapper": {
             "target": "Package",
             "version": "[2.0.78, )"
+          },
+          "FluentValidation": {
+            "target": "Package",
+            "version": "[9.5.1, )"
           },
           "MediatR.Extensions.Microsoft.DependencyInjection": {
             "target": "Package",
