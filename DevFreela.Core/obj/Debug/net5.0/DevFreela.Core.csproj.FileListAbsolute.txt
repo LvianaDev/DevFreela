@@ -2,6 +2,7 @@ C:\Users\lucas\Desktop\DevFreela\DevFreela\DevFreela.Core\bin\Debug\net5.0\DevFr
 C:\Users\lucas\Desktop\DevFreela\DevFreela\DevFreela.Core\bin\Debug\net5.0\DevFreela.Core.dll
 C:\Users\lucas\Desktop\DevFreela\DevFreela\DevFreela.Core\bin\Debug\net5.0\ref\DevFreela.Core.dll
 C:\Users\lucas\Desktop\DevFreela\DevFreela\DevFreela.Core\bin\Debug\net5.0\DevFreela.Core.pdb
+C:\Users\lucas\Desktop\DevFreela\DevFreela\DevFreela.Core\obj\Debug\net5.0\DevFreela.Core.csprojAssemblyReference.cache
 C:\Users\lucas\Desktop\DevFreela\DevFreela\DevFreela.Core\obj\Debug\net5.0\DevFreela.Core.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\lucas\Desktop\DevFreela\DevFreela\DevFreela.Core\obj\Debug\net5.0\DevFreela.Core.AssemblyInfoInputs.cache
 C:\Users\lucas\Desktop\DevFreela\DevFreela\DevFreela.Core\obj\Debug\net5.0\DevFreela.Core.AssemblyInfo.cs
@@ -9,4 +10,3 @@ C:\Users\lucas\Desktop\DevFreela\DevFreela\DevFreela.Core\obj\Debug\net5.0\DevFr
 C:\Users\lucas\Desktop\DevFreela\DevFreela\DevFreela.Core\obj\Debug\net5.0\DevFreela.Core.dll
 C:\Users\lucas\Desktop\DevFreela\DevFreela\DevFreela.Core\obj\Debug\net5.0\ref\DevFreela.Core.dll
 C:\Users\lucas\Desktop\DevFreela\DevFreela\DevFreela.Core\obj\Debug\net5.0\DevFreela.Core.pdb
-C:\Users\lucas\Desktop\DevFreela\DevFreela\DevFreela.Core\obj\Debug\net5.0\DevFreela.Core.csprojAssemblyReference.cache
